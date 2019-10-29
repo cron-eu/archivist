@@ -152,6 +152,8 @@ class HierarchyService
 
         $this->nodeDataRepository->persistEntities();
 
+        $hierarchyLevelNode->setProperty('uriPathSegment', $hierarchyLevelNode->getName());
+
         return $hierarchyLevelNode;
     }
 
