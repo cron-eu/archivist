@@ -20,6 +20,12 @@ use Neos\Flow\Annotations as Flow;
 class NodeSignalInterceptor
 {
     /**
+     * @Flow\InjectConfiguration(path="triggerMode")
+     * @var array
+     */
+    protected $triggerMode = [ 'create' => true, 'update' => true ];
+
+    /**
      * @Flow\InjectConfiguration(path="sortingInstructions")
      * @var array
      */
@@ -38,6 +44,8 @@ class NodeSignalInterceptor
      */
     public function nodeAdded(NodeInterface $node)
     {
+        if (!$this->triggerMode['create']) { return; }
+
         if (!array_key_exists($node->getNodeType()->getName(), $this->sortingInstructions)) {
             return;
         }
@@ -53,6 +61,8 @@ class NodeSignalInterceptor
      */
     public function nodeUpdated(NodeInterface $node)
     {
+        if (!$this->triggerMode['update']) { return; }
+
         if($this->createArchivist()->isNodeInProcess($node)) {
             return;
         }

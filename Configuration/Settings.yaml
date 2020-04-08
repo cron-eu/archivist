@@ -2,3 +2,10 @@ Neos:
   Fusion:
     defaultContext:
       Archivist: 'PunktDe\Archivist\Eel\ArchivistHelper'
+
+PunktDe:
+  Archivist:
+    # when to trigger the organizeNode logic
+    triggerMode:
+      create: true
+      update: true
